@@ -1,9 +1,10 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
-    SubmitField
-from wtforms.validators import DataRequired, Length, Email, Regexp
-from wtforms import ValidationError
 from flask_pagedown.fields import PageDownField
+from flask_wtf import FlaskForm
+from wtforms import StringField, TextAreaField, BooleanField, SelectField, \
+    SubmitField, DateTimeField, DateField, IntegerField
+from wtforms import ValidationError
+from wtforms.validators import DataRequired, Length, Email, Regexp
+
 from ..models import Role, User
 
 
@@ -59,3 +60,20 @@ class PostForm(FlaskForm):
 class CommentForm(FlaskForm):
     body = StringField('Enter your comment', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class WeightForm(FlaskForm):
+    date_time = DateTimeField('DateTime', validators=[DataRequired()])
+    date = DateField('Date', validators=[DataRequired()])
+    name = StringField('Real name', validators=[Length(0, 64)])
+    dt = DateField('Pick a Date', format="%m/%d/%Y")
+
+    submit = SubmitField('Check Weight')
+
+
+class MassDiffForm(FlaskForm):
+    initial_date = DateField('Pick a Date of birth', format="%m/%d/%Y", validators=[DataRequired()])
+    initial_weight = IntegerField('Initial, Kilos', validators=[DataRequired()])
+    actual_date = DateField('Last Measure date', format="%m/%d/%Y", validators=[DataRequired()])
+    actual_weight = IntegerField('Actual Kilos', validators=[DataRequired()])
+    submit = SubmitField('Check Weight')

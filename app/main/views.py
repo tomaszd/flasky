@@ -1,10 +1,10 @@
-from flask import render_template, redirect, url_for, abort, flash, request,\
+from flask import render_template, redirect, url_for, abort, flash, request, \
     current_app, make_response
 from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
 from . import main
-from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm
+from .forms import EditProfileForm, EditProfileAdminForm, PostForm, \
+    CommentForm, WeightForm, MassDiffForm
 from .. import db
 from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
@@ -55,6 +55,20 @@ def index():
     posts = pagination.items
     return render_template('index.html', form=form, posts=posts,
                            show_followed=show_followed, pagination=pagination)
+
+
+@main.route('/progress-weight', methods=['post', 'get'])
+def progress_weight():
+    form = MassDiffForm()
+    if form.validate_on_submit():
+        initial_date = form.data.get('initial_date')
+        actual_date = form.data.get('actual_date')
+        actual_weight = form.data.get('actual_weight')
+        initial_weight = form.data.get('initial_weight')
+        days = (actual_date - initial_date).days
+        flash(f"Progress of weight: {initial_weight}->{actual_weight}\n :"
+              f" from {actual_date} to {initial_date} ({days} days) is: {int((actual_weight-initial_weight)/days)}g /day")
+    return render_template('progress_weight.html', form=form)
 
 
 @main.route('/user/<username>')
@@ -130,7 +144,7 @@ def post(id):
     page = request.args.get('page', 1, type=int)
     if page == -1:
         page = (post.comments.count() - 1) // \
-            current_app.config['FLASKY_COMMENTS_PER_PAGE'] + 1
+               current_app.config['FLASKY_COMMENTS_PER_PAGE'] + 1
     pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
         page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
         error_out=False)
@@ -229,7 +243,7 @@ def followed_by(username):
 @login_required
 def show_all():
     resp = make_response(redirect(url_for('.index')))
-    resp.set_cookie('show_followed', '', max_age=30*24*60*60)
+    resp.set_cookie('show_followed', '', max_age=30 * 24 * 60 * 60)
     return resp
 
 
@@ -237,7 +251,7 @@ def show_all():
 @login_required
 def show_followed():
     resp = make_response(redirect(url_for('.index')))
-    resp.set_cookie('show_followed', '1', max_age=30*24*60*60)
+    resp.set_cookie('show_followed', '1', max_age=30 * 24 * 60 * 60)
     return resp
 
 

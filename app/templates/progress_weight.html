@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DatePicker Example</title>
+
+
+</head>
+<body>
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Weight progress{% endblock %}
+
+{% block page_content %}
+<form method="post" action="">
+    {{ form.hidden_tag() }}
+    <div class="form-group  required">
+        <label class="control-label" for="initial_date">Pick a Date of birth</label>
+        {{ form.initial_date(class="dtpick form-control") }}
+    </div>
+    <div class="form-group  required">
+        <label class="control-label" for="initial_weight">Initial weight (grams)</label>
+        {{ form.initial_weight(class="form-control")}}
+    </div>
+    <div class="form-group  required">
+        <label class="control-label" for="actual_date">Last Measure date</label>
+        {{ form.actual_date(class="dtpick form-control") }}
+    </div>
+    <div class="form-group  required"><label class="control-label" for="actual_weight">Actual weight (grams)</label>
+        {{ form.actual_weight(class="form-control")}}
+    </div>
+    <button class="btn btn-default" type="submit">Check The weight progress</button>
+</form>
+
+
+{% if progress %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+</div>
+{% endfor %}
+
+{% endif %}
+
+
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$( ".dtpick" ).datepicker();
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+{% endblock %}
+
+
+</body>
+</html>
