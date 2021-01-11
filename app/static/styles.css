@@ -105,3 +105,9 @@ div.flask-pagedown-preview h3 {
 .table.followers tr {
     border-bottom: 1px solid #e0e0e0;
 }
+body.weight-form {
+    background-image: url("https://scx2.b-cdn.net/gfx/news/hires/2018/2-birth.jpg");
+}
+label.control-label,button.weight{
+  font-size: large;
+}

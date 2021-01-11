@@ -70,7 +70,7 @@ def progress_weight():
         if actual_date > initial_date:
             flash(f"Progress of weight: {initial_weight}->{actual_weight}\n :"
                   f" from {actual_date} to {initial_date} ({days} days) is: "
-                  f"{int((actual_weight-initial_weight)/days)}g /day")
+                  f"{int((actual_weight-initial_weight)/days)}g/day")
         else:
             flash(f"Be sure data filled are ok")
     return render_template('progress_weight.html', form=form)
