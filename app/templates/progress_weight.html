@@ -16,20 +16,21 @@
 {% block page_content %}
 <form method="post" action="">
     {{ form.hidden_tag() }}
-    <div class="form-group  required">
+
+    <div class="form-group required">
         <label class="control-label" for="initial_date">Pick a Date of birth</label>
         {{ form.initial_date(class="dtpick form-control") }}
     </div>
-    <div class="form-group  required">
+    <div class="form-group required">
         <label class="control-label" for="initial_weight">Initial weight (grams)</label>
-        {{ form.initial_weight(class="form-control")}}
+        {{ form.initial_weight(class="form-control",required=true)}}
     </div>
-    <div class="form-group  required">
+    <div class="form-group required">
         <label class="control-label" for="actual_date">Last Measure date</label>
         {{ form.actual_date(class="dtpick form-control") }}
     </div>
-    <div class="form-group  required"><label class="control-label" for="actual_weight">Actual weight (grams)</label>
-        {{ form.actual_weight(class="form-control")}}
+    <div class="form-group required"><label class="control-label" for="actual_weight">Actual weight (grams)</label>
+        {{ form.actual_weight(class="form-control",required=true)}}
     </div>
     <button class="btn btn-default" type="submit">Check The weight progress</button>
 </form>
@@ -58,6 +59,7 @@
 	$(function() {
 		$( ".dtpick" ).datepicker();
 	});
+
 
 
 

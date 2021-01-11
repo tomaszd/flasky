@@ -2,12 +2,13 @@ from flask import render_template, redirect, url_for, abort, flash, request, \
     current_app, make_response
 from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
+
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm, \
-    CommentForm, WeightForm, MassDiffForm
+    CommentForm, MassDiffForm
 from .. import db
-from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
+from ..models import Permission, Role, User, Post, Comment
 
 
 @main.after_app_request
@@ -66,8 +67,12 @@ def progress_weight():
         actual_weight = form.data.get('actual_weight')
         initial_weight = form.data.get('initial_weight')
         days = (actual_date - initial_date).days
-        flash(f"Progress of weight: {initial_weight}->{actual_weight}\n :"
-              f" from {actual_date} to {initial_date} ({days} days) is: {int((actual_weight-initial_weight)/days)}g /day")
+        if actual_date > initial_date:
+            flash(f"Progress of weight: {initial_weight}->{actual_weight}\n :"
+                  f" from {actual_date} to {initial_date} ({days} days) is: "
+                  f"{int((actual_weight-initial_weight)/days)}g /day")
+        else:
+            flash(f"Be sure data filled are ok")
     return render_template('progress_weight.html', form=form)
 
 
