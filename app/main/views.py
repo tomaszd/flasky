@@ -58,7 +58,7 @@ def index():
                            show_followed=show_followed, pagination=pagination)
 
 
-@main.route('/progress-weight', methods=['post', 'get'])
+@main.route('/ile-przybiera', methods=['post', 'get'])
 def progress_weight():
     form = MassDiffForm()
     if form.validate_on_submit():
