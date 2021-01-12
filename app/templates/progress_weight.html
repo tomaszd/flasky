@@ -14,25 +14,34 @@
 {% block title %}Weight progress{% endblock %}
 
 {% block page_content %}
+<h1 class="weight-title">Kalkulator przyrostu masy ciała niemowląt</h1>
+<br/>
+<br/>
+<br/>
 <form method="post" action="">
     {{ form.hidden_tag() }}
-
     <div class="form-group required">
-        <label class="control-label" for="initial_date">Pick a Date of birth</label>
+        <label class="control-label" for="initial_date">DATA pierwszego pomiaru</label>
         {{ form.initial_date(class="dtpick form-control",required=true) }}
     </div>
+    <br/>
     <div class="form-group required">
-        <label class="control-label" for="initial_weight">Initial weight (grams)</label>
+        <label class="control-label" for="initial_weight">MASA CIAŁA pierwszy pomiar (w gramach)</label>
         {{ form.initial_weight(class="form-control",required=true)}}
     </div>
+    <br/>
     <div class="form-group required">
-        <label class="control-label" for="actual_date">Last Measure date</label>
+        <label class="control-label" for="actual_date">DATA drugiego pomiaru</label>
         {{ form.actual_date(class="dtpick form-control",required=true) }}
     </div>
-    <div class="form-group required"><label class="control-label" for="actual_weight">Actual weight (grams)</label>
+    <br/>
+    <div class="form-group required"><label class="control-label" for="actual_weight">MASA CIAŁA drugi pomiar (w
+        gramach)</label>
         {{ form.actual_weight(class="form-control",required=true)}}
     </div>
-    <button class="btn btn-default weight" type="submit">Check The weight progress</button>
+    <br/>
+    <br/>
+    <button class="btn btn-default weight" type="submit">Sprawdź przyrost masy ciała</button>
 </form>
 
 {% endblock %}
@@ -47,6 +56,8 @@
 	$(function() {
 		$( ".dtpick" ).datepicker();
 	});
+
+
 
 </script>
 {% endblock %}

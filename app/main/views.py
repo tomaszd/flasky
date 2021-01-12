@@ -68,11 +68,9 @@ def progress_weight():
         initial_weight = form.data.get('initial_weight')
         days = (actual_date - initial_date).days
         if actual_date > initial_date:
-            flash(f"Progress of weight: {initial_weight}->{actual_weight}\n :"
-                  f" from {actual_date} to {initial_date} ({days} days) is: "
-                  f"{int((actual_weight-initial_weight)/days)}g/day")
+            flash(f"Minęło {days} dni. Średni przyrost masy ciała to {int((actual_weight-initial_weight)/days)}g/dzień")
         else:
-            flash(f"Be sure data filled are ok")
+            flash(f"Wszystkie dane musza byc poprawne. Drugi pomiar po pierwszym. Masa w gramach")
     return render_template('progress_weight.html', form=form)
 
 

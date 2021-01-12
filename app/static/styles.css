@@ -106,8 +106,26 @@ div.flask-pagedown-preview h3 {
     border-bottom: 1px solid #e0e0e0;
 }
 body.weight-form {
-    background-image: url("https://scx2.b-cdn.net/gfx/news/hires/2018/2-birth.jpg");
+    background-image: url("https://images.unsplash.com/photo-1486427944299-d1955d23e34d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80");
+    background-size: cover;
 }
-label.control-label,button.weight{
-  font-size: large;
+label.control-label{
+  font-family: 'Amatic SC';font-size: 40px;
 }
+button.weight {
+  background-color: #df9fbf;
+  font-family: 'Kaushan Script';;font-size: 40px;
+  justify-content: center;
+}
+.weight-title {
+  font-family: 'Kaushan Script';
+  font-size: 50px;
+  color:  #cc6699;
+  text-align: center;
+}
+.flash-message {
+  font-family: 'Amatic SC';font-size: 60px;
+  background-color:  #f2d9e6;
+  text-align: center;
+  color:black;
+  }
