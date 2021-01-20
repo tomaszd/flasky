@@ -21,7 +21,7 @@
 <form method="post" action="">
     {{ form.hidden_tag() }}
     <div class="form-group required">
-        <label class="control-label" for="initial_date">DATA pierwszego pomiaru</label>
+        <label class="control-label" for="initial_date">DATA pierwszego pomiaru (miesiąc/dzień/rok)</label>
         {{ form.initial_date(class="dtpick form-control",required=true) }}
     </div>
     <br/>
@@ -31,7 +31,7 @@
     </div>
     <br/>
     <div class="form-group required">
-        <label class="control-label" for="actual_date">DATA drugiego pomiaru</label>
+        <label class="control-label" for="actual_date">DATA drugiego pomiaru (miesiąc/dzień/rok)</label>
         {{ form.actual_date(class="dtpick form-control",required=true) }}
     </div>
     <br/>
@@ -41,7 +41,11 @@
     </div>
     <br/>
     <br/>
-    <button class="btn btn-default weight" type="submit">Sprawdź przyrost masy ciała</button>
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-default weight" type="submit">Sprawdź przyrost masy ciała</button>
+        </div>
+    </div>
 </form>
 
 {% endblock %}
@@ -56,6 +60,8 @@
 	$(function() {
 		$( ".dtpick" ).datepicker();
 	});
+
+
 
 
 

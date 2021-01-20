@@ -62,18 +62,9 @@ class CommentForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-class WeightForm(FlaskForm):
-    date_time = DateTimeField('DateTime', validators=[DataRequired()])
-    date = DateField('Date', validators=[DataRequired()])
-    name = StringField('Real name', validators=[Length(0, 64)])
-    dt = DateField('Pick a Date', format="%m/%d/%Y")
-
-    submit = SubmitField('Check Weight')
-
-
 class MassDiffForm(FlaskForm):
-    initial_date = DateField('Pick a Date of birth', format="%m/%d/%Y", validators=[DataRequired()])
+    initial_date = DateField('Pick a Date of birth', format="%d/%m/%Y", validators=[DataRequired()])
     initial_weight = IntegerField('Initial, Kilos', validators=[DataRequired()])
-    actual_date = DateField('Last Measure date', format="%m/%d/%Y", validators=[DataRequired()])
+    actual_date = DateField('Last Measure date', format="%d/%m/%Y", validators=[DataRequired()])
     actual_weight = IntegerField('Actual Kilos', validators=[DataRequired()])
     submit = SubmitField('Check Weight')
