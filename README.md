@@ -1,4 +1,4 @@
-Flasky
-======
 
-Added sample deployent on heroku: https://flask-doctor.herokuapp.com/
+App needed by doctors to count weight gain of newborns
+
+Sample deployment : https://flask-doctor.herokuapp.com/ile-przybiera
