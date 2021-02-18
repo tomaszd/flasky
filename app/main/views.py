@@ -78,7 +78,7 @@ def api_bmi():
             'weight': weight,
             'height': height,
             'error': error,
-            'howto': "set height/ weight in GET params e.g.URL?weight=90&height=2"
+            'howto': f"Set height (cm)/weight (m) in GET params e.g. {request.base_url}?weight=90&height=1.75"
         }), 406
     bmi = weight / (height ** 2)
     return jsonify({
