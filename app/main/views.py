@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, abort, flash, request, \
-    current_app, make_response
+    current_app, make_response, jsonify
 from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
 
@@ -56,6 +56,37 @@ def index():
     posts = pagination.items
     return render_template('index.html', form=form, posts=posts,
                            show_followed=show_followed, pagination=pagination)
+
+
+@main.route('/api-bmi', methods=['post', 'get'])
+def api_bmi():
+    error = None
+    weight = request.args.get('weight')
+    height = request.args.get('height')
+    if weight:
+        try:
+            weight = float(weight)
+        except:
+            error = "wrong values"
+    if height:
+        try:
+            height = float(height)
+        except:
+            error = "wrong values"
+    if not (weight and height) or error is not None:
+        return jsonify({
+            'weight': weight,
+            'height': height,
+            'error': error,
+            'howto': "set height/ weight in GET params e.g.URL?weight=90&height=2"
+        }), 406
+    bmi = weight / (height ** 2)
+    return jsonify({
+        'weight': weight,
+        'height': height,
+        'bmi': bmi,
+        'howto': "set height/ weight in GET params e.g.URL?weight=90&height=2"
+    })
 
 
 @main.route('/ile-przybiera', methods=['post', 'get'])
