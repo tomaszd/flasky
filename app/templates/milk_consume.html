@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ilosc mleka</title>
+
+
+</head>
+<body class="milk-consume">
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Milk consume{% endblock %}
+
+{% block page_content %}
+<h1 class="weight-title">Kalkulator spożycia mleka przez niemowlęta</h1>
+<br/>
+<br/>
+<br/>
+<form method="post" action="">
+    {{ form.hidden_tag() }}
+    <div class="form-group required"><label class="control-label" for="actual_days">Wiek dziecka w dniach</label>
+        {{ form.actual_days(class="form-control",required=true)}}
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-default weight" type="submit">Sprawdź optymalne spożycie mleka</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$( ".dtpick" ).datepicker();
+	});
+
+
+
+</script>
+{% endblock %}
+</body>
+</html>

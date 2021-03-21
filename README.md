@@ -1,7 +1,7 @@
 App needed by medical doctors to count weight gain of newborns.
 Simple interface to count the gain / loss of weight.
 
-###Sample deployment :
+### Sample deployment :
 https://flask-doctor.herokuapp.com/ile-przybiera
 
 

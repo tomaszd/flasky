@@ -1,3 +1,5 @@
+import math
+
 from flask import render_template, redirect, url_for, abort, flash, request, \
     current_app, make_response, jsonify
 from flask_login import login_required, current_user
@@ -5,7 +7,7 @@ from flask_sqlalchemy import get_debug_queries
 
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm, \
-    CommentForm, MassDiffForm
+    CommentForm, MassDiffForm, MilkInfantForm
 from .. import db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Post, Comment
@@ -88,6 +90,7 @@ def api_bmi():
         'howto': f"Set height(cm)/weight(m) in GET params e.g. {request.base_url}?weight=90&height=1.75"
     })
 
+
 @main.route('/ile-przybiera', methods=['post', 'get'])
 def progress_weight():
     form = MassDiffForm()
@@ -98,10 +101,28 @@ def progress_weight():
         initial_weight = form.data.get('initial_weight')
         days = (actual_date - initial_date).days
         if actual_date > initial_date:
-            flash(f"Minęło {days} dni. Średni przyrost masy ciała to {int((actual_weight-initial_weight)/days)}g/dzień")
+            flash(
+                f"Minęło {days} dni. Średni przyrost masy ciała to {int((actual_weight - initial_weight) / days)}g/dzień")
         else:
             flash(f"Wszystkie dane musza byc poprawne. Drugi pomiar po pierwszym. Masa w gramach")
     return render_template('progress_weight.html', form=form)
+
+
+# Wielkość porcji w mililitrach = 10 x (dzień życia – 1)
+# Potem (po 10. dniu życia) karmienie noworodka i obliczenie prawidłowej wielkości porcji ułatwi następujący wzór:
+# Wielkość porcji w mililitrach = 100 + (miesiąc życia x 10)
+@main.route('/ile-mleka', methods=['post', 'get'])
+def milk_drink():
+    form = MilkInfantForm()
+    if form.validate_on_submit():
+        optimal_ratio = 0
+        actual_days = form.data.get('actual_days')
+        if 0 < actual_days < 10:
+            optimal_ratio = 10 * (actual_days - 1)
+        else:
+            optimal_ratio = 100 + math.floor(actual_days / 30) * 10
+        flash(f"Optymalna porcja mleka : {optimal_ratio} ml .Minęło {actual_days} dni od urodzenia.")
+    return render_template('milk_consume.html', form=form)
 
 
 @main.route('/user/<username>')

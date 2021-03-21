@@ -68,3 +68,18 @@ class MassDiffForm(FlaskForm):
     actual_date = DateField('Last Measure date', format="%m/%d/%Y", validators=[DataRequired()])
     actual_weight = IntegerField('Actual Kilos', validators=[DataRequired()])
     submit = SubmitField('Check Weight')
+
+
+# Ile mleka dla noworodka karmionego butelką? Oblicz wielkość porcji!
+# Eksperci ds. żywienia dzieci stworzyli wzór, dzięki któremu obliczysz idealną wielkość porcji mleka,
+# z uwzględnieniem wieku dziecka. W pierwszych 10. dniach życia maluszka możemy obliczyć to następująco:
+# Wielkość porcji w mililitrach = 10 x (dzień życia – 1)
+# Potem (po 10. dniu życia) karmienie noworodka i obliczenie prawidłowej wielkości porcji ułatwi następujący wzór:
+# Wielkość porcji w mililitrach = 100 + (miesiąc życia x 10)
+# Znajomość wzoru z pewnością daje orientacyjną odpowiedź na pytanie,
+# ile mleka pije noworodek. Znacznie prościej i wygodniej będzie Ci jednak po prostu
+# trzymać się zaleceń umieszczonych na opakowaniu mleka modyfikowanego.
+
+class MilkInfantForm(FlaskForm):
+    actual_days = IntegerField('Age day', validators=[DataRequired()])
+    submit = SubmitField('Check Milk')

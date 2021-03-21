@@ -27,6 +27,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.progress_weight') }}">Ile przybiera niemowlę</a></li>
                 <li><a href="{{ url_for('main.api_bmi') }}">Api BMI</a></li>
+                <li><a href="{{ url_for('main.milk_drink') }}">Ile pije niemowlę</a></li>
                 {% if current_user.is_authenticated %}
                 <!--<li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>-->
                 {% endif %}
